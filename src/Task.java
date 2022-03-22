@@ -4,8 +4,8 @@ public class Task {
     private String name;
     private String Description;
     private static int count = 0;
-    protected int taskId;
-    protected String status;
+    private int taskId;
+    private String status;
 
     public Task(String name, String Description) {
        this.name = name;
@@ -24,6 +24,10 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStatus(){
+        return status;
     }
 
     @Override

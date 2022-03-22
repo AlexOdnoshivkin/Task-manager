@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Manager {
@@ -6,28 +7,16 @@ public class Manager {
     private HashMap<Integer, Epic> epicMap = new HashMap<>();
     private HashMap<Integer, Subtask> subtaskMap = new HashMap<>();
 
-    public ArrayList<Task> getAllTask() {
-        ArrayList<Task> taskList = new ArrayList<>();
-        for (Integer id : taskMap.keySet()) {
-            taskList.add(taskMap.get(id));
-        }
-        return taskList;
+    public Collection<Task> getAllTask() {
+        return taskMap.values();
     }
 
-    public ArrayList<Epic> getAllEpic() {
-        ArrayList<Epic> epicList = new ArrayList<>();
-        for (Integer id : epicMap.keySet()) {
-            epicList.add(epicMap.get(id));
-        }
-        return epicList;
+    public Collection<Epic> getAllEpic() {
+        return epicMap.values();
     }
 
-    public ArrayList<Subtask> getAllSubTask() {
-        ArrayList<Subtask> subtaskList = new ArrayList<>();
-        for (Integer id : subtaskMap.keySet()) {
-            subtaskList.add(subtaskMap.get(id));
-        }
-        return subtaskList;
+    public Collection<Subtask> getAllSubTask() {
+        return subtaskMap.values();
     }
 
     public void deleteAllTask() {
@@ -44,30 +33,15 @@ public class Manager {
     }
 
     public Task getTask(int taskId) {
-        for (Integer id : taskMap.keySet()) {
-            if (id == taskId){
-                return taskMap.get(taskId);
-            }
-        }
-        return null;
+        return taskMap.get(taskId);
     }
 
     public Task getEpic(int taskId) {
-        for (Integer id : epicMap.keySet()) {
-            if (id == taskId){
-                return epicMap.get(taskId);
-            }
-        }
-        return null;
+        return epicMap.get(taskId);
     }
 
     public Task getSubTask(int taskId) {
-        for (Integer id : subtaskMap.keySet()) {
-            if (id == taskId){
-                return subtaskMap.get(taskId);
-            }
-        }
-        return null;
+        return subtaskMap.get(taskId);
     }
 
     public void createTask(Task task, String status) {
@@ -112,42 +86,37 @@ public class Manager {
     }
 
     public void updateSubtask (Subtask subtask, int id, String status) {
-        subtask.setStatus(status);
         if (subtaskMap.containsKey(id)){
             Subtask subtask1 = subtaskMap.get(id);
             subtask.setId(id);
             subtask.setHeadEpic(subtask1.getHeadEpicId());
+            subtask.setStatus(status);
             subtaskMap.put(id, subtask);
             Epic epic = epicMap.get(subtask1.getHeadEpicId());
+            epic.removeSubtask(subtask1);
             epic.addSubTask(subtask);
             setEpicStatus(epic);
         }
     }
 
     public void deleteTask (int taskId) {
-        if (taskMap.containsKey(taskId)) {
             taskMap.remove(taskId);
-        }
     }
 
     public void deleteEpic (int epicId) {
-        if (epicMap.containsKey(epicId)) {
             Epic epic = epicMap.get(epicId);
             for (Subtask subtask : epic.getSubTaskInEpic()) { //Удаляем все подзадачи
                 subtaskMap.remove(subtask.getId());
             }
             epicMap.remove(epicId);
-        }
     }
 
     public void deleteSubtask(int subtaskId) {
-        if (subtaskMap.containsKey(subtaskId)) {
             Subtask subtask = subtaskMap.get(subtaskId);
             Epic epic = epicMap.get(subtask.getHeadEpicId());
             epic.removeSubtask(subtask); // Удаляем подзадачу из эпика
             setEpicStatus(epic); // Обновляем статус эпика
             subtaskMap.remove(subtaskId);
-        }
     }
 
     public ArrayList<Subtask> getEpicSubtask(int epicId) {
