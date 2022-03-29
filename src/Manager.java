@@ -59,6 +59,9 @@ public class Manager {
                 tasksForDelete.add(task);
             }
         }
+        for (Task task : tasksForDelete) {
+            allTaskMap.remove(task.getId());
+        }
     }
 
     public void deleteAllSubtask() {
