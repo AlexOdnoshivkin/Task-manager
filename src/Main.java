@@ -59,10 +59,10 @@ public class Main {
 
     static void checkTasksRetrievalById(){
         System.out.println("Проверка получения задач по идентификатору");
-        System.out.println(manager.getTask(0));
-        System.out.println(manager.getEpic(2));
-        System.out.println(manager.getSubTask(5));
-        System.out.println(manager.getSubTask(7));
+        System.out.println(manager.getTaskById(0));
+        System.out.println(manager.getTaskById(2));
+        System.out.println(manager.getTaskById(5));
+        System.out.println(manager.getTaskById(7));
         System.out.println("");
     }
 
@@ -80,11 +80,11 @@ public class Main {
         System.out.println("Обновление обычной задачи");
         Task task = new Task("Java sprint 2 hw", "done!");
         manager.updateTask(task, 0, "DONE");
-        System.out.println(manager.getTask(0));
+        System.out.println(manager.getTaskById(0));
         System.out.println("Обновление эпика");
         Epic epic = new Epic("Починить машину", "Сломались тормоза");
         manager.updateEpic(epic, 2);
-        System.out.println(manager.getEpic(2));
+        System.out.println(manager.getTaskById(2));
         System.out.println("Обновление подзадач и статуса эпика");
         Subtask carDiagnostic = new Subtask("Провести диагностику","На сервисе");
         manager.updateSubtask(carDiagnostic, 3, "DONE");
@@ -92,18 +92,18 @@ public class Main {
         manager.updateSubtask(buyComponents, 4, "DONE");
         Subtask fixTheMalfunction = new Subtask("Устранить неисправность", "");
         manager.updateSubtask(fixTheMalfunction, 5, "DONE");
-        System.out.println(manager.getSubTask(3));
-        System.out.println(manager.getSubTask(4));
-        System.out.println(manager.getSubTask(5));
-        System.out.println(manager.getEpic(2));
+        System.out.println(manager.getTaskById(3));
+        System.out.println(manager.getTaskById(4));
+        System.out.println(manager.getTaskById(5));
+        System.out.println(manager.getTaskById(2));
         System.out.println("");
     }
 
     static void deleteTasksById() {
         System.out.println("Удаляем задачи по идентификатору");
-        manager.deleteTask(0);
-        manager.deleteSubtask(4);
-        manager.deleteEpic(2);
+        manager.deleteTaskById(0);
+        manager.deleteTaskById(4);
+        manager.deleteTaskById(2);
     }
 
     static void deleteTasksByType() {
