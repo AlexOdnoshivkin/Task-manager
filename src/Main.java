@@ -1,7 +1,15 @@
+import Manager.InMemoryTaskManager;
+import Manager.Managers;
+import Model.Epic;
+import Model.Subtask;
+import Model.Task;
+
 import java.util.ArrayList;
 
 public class Main {
-    private static Manager manager  = new Manager();
+    private static final Managers managers = new Managers();
+
+    private static final InMemoryTaskManager manager = (InMemoryTaskManager) managers.getDefault();
 
     public static void main(String[] args) {
         //Создаём задачи всех типов
