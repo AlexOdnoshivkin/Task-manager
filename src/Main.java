@@ -1,6 +1,7 @@
 import Manager.InMemoryTaskManager;
 import Manager.Managers;
 import Model.Epic;
+import Model.Status;
 import Model.Subtask;
 import Model.Task;
 
@@ -55,14 +56,14 @@ public class Main {
         Epic  roomRepair = new Epic("Сделать ремонт в комнате", "Завершить до лета");
         Subtask buyWallpaper = new Subtask("Купить обои", "Цвет обоев - изумрудный");
 
-        manager.createTask(homework, "NEW");
-        manager.createTask(dinner, "IN_PROGRESS");
+        manager.createTask(homework, Status.NEW);
+        manager.createTask(dinner,Status.IN_PROGRESS);
         manager.createEpic(carFix);
-        manager.createSubtask(carDiagnostic,"NEW", carFix.getId());
-        manager.createSubtask(buyComponents,"NEW", carFix.getId());
-        manager.createSubtask(fixTheMalfunction,"NEW", carFix.getId());
+        manager.createSubtask(carDiagnostic,Status.NEW, carFix.getId());
+        manager.createSubtask(buyComponents,Status.NEW, carFix.getId());
+        manager.createSubtask(fixTheMalfunction,Status.NEW, carFix.getId());
         manager.createEpic(roomRepair);
-        manager.createSubtask(buyWallpaper,"NEW", roomRepair.getId());
+        manager.createSubtask(buyWallpaper,Status.NEW, roomRepair.getId());
     }
 
     static void checkTasksRetrievalById(){
@@ -87,7 +88,7 @@ public class Main {
         System.out.println("Проверка обновления задач");
         System.out.println("Обновление обычной задачи");
         Task task = new Task("Java sprint 2 hw", "done!");
-        manager.updateTask(task, 0, "DONE");
+        manager.updateTask(task, 0, Status.DONE);
         System.out.println(manager.getTaskById(0));
         System.out.println("Обновление эпика");
         Epic epic = new Epic("Починить машину", "Сломались тормоза");
@@ -95,11 +96,11 @@ public class Main {
         System.out.println(manager.getTaskById(2));
         System.out.println("Обновление подзадач и статуса эпика");
         Subtask carDiagnostic = new Subtask("Провести диагностику","На сервисе");
-        manager.updateSubtask(carDiagnostic, 3, "DONE");
+        manager.updateSubtask(carDiagnostic, 3, Status.DONE);
         Subtask buyComponents = new Subtask("Купить комплектующие", "На авторынке");
-        manager.updateSubtask(buyComponents, 4, "DONE");
+        manager.updateSubtask(buyComponents, 4, Status.DONE);
         Subtask fixTheMalfunction = new Subtask("Устранить неисправность", "");
-        manager.updateSubtask(fixTheMalfunction, 5, "DONE");
+        manager.updateSubtask(fixTheMalfunction, 5, Status.DONE);
         System.out.println(manager.getTaskById(3));
         System.out.println(manager.getTaskById(4));
         System.out.println(manager.getTaskById(5));

@@ -7,7 +7,7 @@ public class Task {
     private String Description;
     private static int count = 0;
     private int taskId;
-    private String status;
+    private Status status;
 
     public Task(String name, String Description) {
        this.name = name;
@@ -24,11 +24,11 @@ public class Task {
         this.taskId = taskId;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getStatus(){
+    public Status getStatus(){
         return status;
     }
 
