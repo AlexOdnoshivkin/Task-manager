@@ -1,16 +1,16 @@
-import Manager.InMemoryTaskManager;
 import Manager.Managers;
+import Manager.TaskManager;
 import Model.Epic;
 import Model.Status;
 import Model.Subtask;
 import Model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    private static final Managers managers = new Managers();
+    private static final TaskManager manager = Managers.getDefault();
 
-    private static final InMemoryTaskManager manager = (InMemoryTaskManager) managers.getDefault();
 
     public static void main(String[] args) {
         //Создаём задачи всех типов
@@ -69,9 +69,15 @@ public class Main {
     static void checkTasksRetrievalById(){
         System.out.println("Проверка получения задач по идентификатору");
         System.out.println(manager.getTaskById(0));
+        printHistory();
         System.out.println(manager.getTaskById(2));
+        printHistory();
         System.out.println(manager.getTaskById(5));
+        printHistory();
         System.out.println(manager.getTaskById(7));
+        printHistory();
+        System.out.println(manager.getTaskById(4));
+        printHistory();
         System.out.println("");
     }
 
@@ -102,10 +108,13 @@ public class Main {
         Subtask fixTheMalfunction = new Subtask("Устранить неисправность", "");
         manager.updateSubtask(fixTheMalfunction, 5, Status.DONE);
         System.out.println(manager.getTaskById(3));
+        printHistory();
         System.out.println(manager.getTaskById(4));
+        printHistory();
         System.out.println(manager.getTaskById(5));
+        printHistory();
         System.out.println(manager.getTaskById(2));
-        System.out.println("");
+        printHistory();
     }
 
     static void deleteTasksById() {
@@ -120,6 +129,15 @@ public class Main {
         manager.deleteAllTask();
         manager.deleteAllSubtask();
         manager.deleteAllEpic();
+    }
+
+    static void printHistory() {
+        System.out.println("История запросов:");
+        List<Task> history = manager.getHistory();
+        for (Task task : history){
+            System.out.print(task.getId());
+        }
+        System.out.println("");
     }
 
 }

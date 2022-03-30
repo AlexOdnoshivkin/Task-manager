@@ -7,8 +7,9 @@ import Model.Task;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-interface TaskManager {
+public interface TaskManager {
     Collection<Task> getAllTask();
 
     Collection<Epic> getAllEpic();
@@ -38,5 +39,6 @@ interface TaskManager {
     void deleteTaskById(int taskId);
 
     ArrayList<Subtask> getEpicSubtask(int epicId);
+    List<Task> getHistory();
 
 }
