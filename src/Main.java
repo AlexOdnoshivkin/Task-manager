@@ -135,7 +135,7 @@ public class Main {
         System.out.println("История запросов:");
         List<Task> history = manager.getHistory();
         for (Task task : history){
-            System.out.print(task.getId());
+            System.out.print(task.getId() + " ");
         }
         System.out.println("");
     }
