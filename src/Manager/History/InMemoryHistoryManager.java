@@ -54,14 +54,11 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public List<Task> getHistory() {
-        //LinkedList<Integer> linkedList
         history.clear();
-        if (head != null) {
-            Node node = head;
-            while (node != null) {
-                history.add(node.getTask());
-                node = node.getNext();
-            }
+        Node node = head;
+        while (node != null) {
+            history.add(node.getTask());
+            node = node.getNext();
         }
         return history;
     }
