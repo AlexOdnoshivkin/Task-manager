@@ -16,20 +16,45 @@ public class Main {
         //Создаём задачи всех типов
         createTasks();
         //Проверка вывода списка всех задач каждого типа
-        System.out.println("Проверка вывода списка всех задач каждого типа");
-        printAllTask();
-        //Проверка получения задач по идентификатору
-        checkTasksRetrievalById();
-        //Получение списка подзадач Эпика
-        getAllSubtasksOfEpc();
-        //Проверка обновления задач
-        checkTasksUpdate();
-        //Удаление задач по идентификатору
-        deleteTasksById();
-        printAllTask();
-        //Удаление всех задач определённого типа
-        deleteTasksByType();
-        printAllTask();
+        System.out.println("Проверка вывода истории запросов:");
+        manager.getTaskById(2);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        manager.getTaskById(1);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(5);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(2);
+        printHistory();
+        manager.getTaskById(1);
+        printHistory();
+        manager.getTaskById(4);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        manager.getTaskById(5);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        System.out.println("Удаляем задачу (id = 0)");
+        manager.deleteTaskById(0);
+        printHistory();
+        System.out.println("Удаляем эпик (id = 2, id подзадач = 3, 4, 5)");
+        manager.deleteTaskById(2);
+        printHistory();
     }
 
     static void printAllTask (){
@@ -54,7 +79,6 @@ public class Main {
         Subtask buyComponents = new Subtask("Купить комплектующие", "В магазине Би-Би");
         Subtask fixTheMalfunction = new Subtask("Устранить неисправность", "Можно попросить помощи у Кирилла");
         Epic  roomRepair = new Epic("Сделать ремонт в комнате", "Завершить до лета");
-        Subtask buyWallpaper = new Subtask("Купить обои", "Цвет обоев - изумрудный");
 
         manager.createTask(homework, Status.NEW);
         manager.createTask(dinner,Status.IN_PROGRESS);
@@ -63,7 +87,6 @@ public class Main {
         manager.createSubtask(buyComponents,Status.NEW, carFix.getId());
         manager.createSubtask(fixTheMalfunction,Status.NEW, carFix.getId());
         manager.createEpic(roomRepair);
-        manager.createSubtask(buyWallpaper,Status.NEW, roomRepair.getId());
     }
 
     static void checkTasksRetrievalById(){
@@ -96,10 +119,12 @@ public class Main {
         Task task = new Task("Java sprint 2 hw", "done!");
         manager.updateTask(task, 0, Status.DONE);
         System.out.println(manager.getTaskById(0));
+        printHistory();
         System.out.println("Обновление эпика");
         Epic epic = new Epic("Починить машину", "Сломались тормоза");
         manager.updateEpic(epic, 2);
         System.out.println(manager.getTaskById(2));
+        printHistory();
         System.out.println("Обновление подзадач и статуса эпика");
         Subtask carDiagnostic = new Subtask("Провести диагностику","На сервисе");
         manager.updateSubtask(carDiagnostic, 3, Status.DONE);
@@ -120,15 +145,21 @@ public class Main {
     static void deleteTasksById() {
         System.out.println("Удаляем задачи по идентификатору");
         manager.deleteTaskById(0);
+        printHistory();
         manager.deleteTaskById(4);
+        printHistory();
         manager.deleteTaskById(2);
+        printHistory();
     }
 
     static void deleteTasksByType() {
         System.out.println("Удаляем все задачи определённого типа");
         manager.deleteAllTask();
+        printHistory();
         manager.deleteAllSubtask();
+        printHistory();
         manager.deleteAllEpic();
+        printHistory();
     }
 
     static void printHistory() {
