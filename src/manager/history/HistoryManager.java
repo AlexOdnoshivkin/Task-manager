@@ -1,6 +1,6 @@
-package Manager.History;
+package manager.history;
 
-import Model.Task;
+import model.Task;
 
 import java.util.List;
 

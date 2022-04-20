@@ -1,19 +1,18 @@
-package Model;
+package model;
 
 import java.util.Objects;
 
 public class Task {
     private String name;
-    private String Description;
+    private String description;
     private static int count = 0;
     private int taskId;
     private Status status;
 
-    public Task(String name, String Description) {
+    public Task(String name, String description) {
        this.name = name;
-       this.Description = Description;
-       taskId = count;
-       count++;
+       this.description = description;
+       this.taskId = count++;
     }
 
     public int getId(){
@@ -37,19 +36,19 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return taskId == task.taskId && Objects.equals(name, task.name) && Objects.equals(Description, task.Description) && Objects.equals(status, task.status);
+        return taskId == task.taskId && Objects.equals(name, task.name) && Objects.equals(description, task.description) && Objects.equals(status, task.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, Description, taskId, status);
+        return Objects.hash(name, description, taskId, status);
     }
 
     @Override
     public String toString() {
         return  this.getClass() + "{" +
                 "name='" + name + '\'' +
-                ", Description='" + Description + '\'' +
+                ", Description='" + description + '\'' +
                 ", taskId=" + taskId +
                 ", status='" + status + '\'' +
                 '}';

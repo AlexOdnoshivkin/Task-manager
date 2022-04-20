@@ -1,26 +1,26 @@
-package Manager;
+package manager;
 
-import Model.Epic;
-import Model.Status;
-import Model.Subtask;
-import Model.Task;
+import model.Epic;
+import model.Status;
+import model.Subtask;
+import model.Task;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public interface TaskManager {
-    Collection<Task> getAllTask();
+    Collection<Task> getAllTasks();
 
-    Collection<Epic> getAllEpic();
+    Collection<Epic> getAllEpics();
 
-    Collection<Subtask> getAllSubTask();
+    Collection<Subtask> getAllSubTasks();
 
-    void deleteAllTask();
+    void deleteAllTasks();
 
-    void deleteAllEpic();
+    void deleteAllEpics();
 
-    void deleteAllSubtask();
+    void deleteAllSubtasks();
 
     Task getTaskById(int taskId);
 

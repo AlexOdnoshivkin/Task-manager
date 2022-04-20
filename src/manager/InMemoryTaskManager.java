@@ -1,9 +1,9 @@
-package Manager;
-import Manager.History.HistoryManager;
-import Model.Status;
-import Model.Task;
-import Model.Epic;
-import Model.Subtask;
+package manager;
+import manager.history.HistoryManager;
+import model.Status;
+import model.Task;
+import model.Epic;
+import model.Subtask;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Collection<Task> getAllTask() {
+    public Collection<Task> getAllTasks() {
         Collection<Task> epicCollection = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() == Task.class){
@@ -30,7 +30,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Collection<Epic> getAllEpic() {
+    public Collection<Epic> getAllEpics() {
         Collection<Epic> epicCollection = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() == Epic.class){
@@ -41,7 +41,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Collection<Subtask> getAllSubTask() {
+    public Collection<Subtask> getAllSubTasks() {
         Collection<Subtask> epicCollection = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() == Subtask.class){
@@ -52,7 +52,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteAllTask() {
+    public void deleteAllTasks() {
         ArrayList<Task> tasksForDelete = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() == Task.class){
@@ -66,7 +66,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteAllEpic() {
+    public void deleteAllEpics() {
         ArrayList<Task> tasksForDelete = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() != Task.class){
@@ -80,7 +80,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteAllSubtask() {
+    public void deleteAllSubtasks() {
         ArrayList<Task> tasksForDelete = new ArrayList<>();
         for (Task task : allTaskMap.values()) {
             if (task.getClass() == Subtask.class){

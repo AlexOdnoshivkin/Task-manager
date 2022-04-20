@@ -1,9 +1,9 @@
-import Manager.Managers;
-import Manager.TaskManager;
-import Model.Epic;
-import Model.Status;
-import Model.Subtask;
-import Model.Task;
+import manager.Managers;
+import manager.TaskManager;
+import model.Epic;
+import model.Status;
+import model.Subtask;
+import model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,55 +16,17 @@ public class Main {
         //Создаём задачи всех типов
         createTasks();
         //Проверка вывода списка всех задач каждого типа
-        System.out.println("Проверка вывода истории запросов:");
-        manager.getTaskById(2);
-        printHistory();
-        manager.getTaskById(0);
-        printHistory();
-        manager.getTaskById(3);
-        printHistory();
-        manager.getTaskById(1);
-        printHistory();
-        manager.getTaskById(6);
-        printHistory();
-        manager.getTaskById(5);
-        printHistory();
-        manager.getTaskById(0);
-        printHistory();
-        manager.getTaskById(2);
-        printHistory();
-        manager.getTaskById(1);
-        printHistory();
-        manager.getTaskById(4);
-        printHistory();
-        manager.getTaskById(3);
-        printHistory();
-        manager.getTaskById(5);
-        printHistory();
-        manager.getTaskById(6);
-        printHistory();
-        manager.getTaskById(0);
-        printHistory();
-        manager.getTaskById(6);
-        printHistory();
-        manager.getTaskById(3);
-        printHistory();
-        System.out.println("Удаляем задачу (id = 0)");
-        manager.deleteTaskById(0);
-        printHistory();
-        System.out.println("Удаляем эпик (id = 2, id подзадач = 3, 4, 5)");
-        manager.deleteTaskById(2);
-        printHistory();
+        testHistory();
     }
 
     static void printAllTask (){
-        for (Task taskForPrint : manager.getAllTask()) {
+        for (Task taskForPrint : manager.getAllTasks()) {
             System.out.println(taskForPrint);
         }
-        for (Task epicForPrint : manager.getAllEpic()) {
+        for (Task epicForPrint : manager.getAllEpics()) {
             System.out.println(epicForPrint);
         }
-        for (Task subtaskForPrint : manager.getAllSubTask()) {
+        for (Task subtaskForPrint : manager.getAllSubTasks()) {
             System.out.println(subtaskForPrint);
         }
         System.out.println("");
@@ -154,11 +116,11 @@ public class Main {
 
     static void deleteTasksByType() {
         System.out.println("Удаляем все задачи определённого типа");
-        manager.deleteAllTask();
+        manager.deleteAllTasks();
         printHistory();
-        manager.deleteAllSubtask();
+        manager.deleteAllSubtasks();
         printHistory();
-        manager.deleteAllEpic();
+        manager.deleteAllEpics();
         printHistory();
     }
 
@@ -169,6 +131,48 @@ public class Main {
             System.out.print(task.getId() + " ");
         }
         System.out.println("");
+    }
+
+    static void testHistory() {
+        System.out.println("Проверка вывода истории запросов:");
+        manager.getTaskById(2);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        manager.getTaskById(1);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(5);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(2);
+        printHistory();
+        manager.getTaskById(1);
+        printHistory();
+        manager.getTaskById(4);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        manager.getTaskById(5);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(0);
+        printHistory();
+        manager.getTaskById(6);
+        printHistory();
+        manager.getTaskById(3);
+        printHistory();
+        System.out.println("Удаляем задачу (id = 0)");
+        manager.deleteTaskById(0);
+        printHistory();
+        System.out.println("Удаляем эпик (id = 2, id подзадач = 3, 4, 5)");
+        manager.deleteTaskById(2);
+        printHistory();
     }
 
 }

@@ -1,5 +1,5 @@
-package Manager.History;
-import Model.Task;
+package manager.history;
+import model.Task;
 
 import java.util.Objects;
 
