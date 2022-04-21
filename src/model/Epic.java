@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Epic extends Task {
-    private ArrayList<Subtask> subTaskInEpic;
+    private final ArrayList<Subtask> subTaskInEpic;
 
     public Epic(String name, String description) {
         super(name, description);
