@@ -9,6 +9,10 @@ public class Managers {
         return new InMemoryTaskManager();
     }
 
+    public static FileBackedTasksManager getFileBackedManager(String path) {
+        return new FileBackedTasksManager(path);
+    }
+
     public static HistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();
     }

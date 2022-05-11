@@ -6,17 +6,34 @@ public class Task {
     private String name;
     private String description;
     private static int count = 0;
+
+
+
     private int taskId;
     private Status status;
+    protected TaskTypes type; // добавил для удобства работы с файлом
 
     public Task(String name, String description) {
        this.name = name;
        this.description = description;
+       this.type = TaskTypes.TASK;
        this.taskId = count++;
     }
 
     public int getId(){
         return taskId;
+    }
+
+    public TaskTypes getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setId(int taskId){
@@ -29,6 +46,10 @@ public class Task {
 
     public Status getStatus(){
         return status;
+    }
+
+    public static void setCount(int count) {
+        Task.count = count;
     }
 
     @Override
@@ -46,11 +67,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return  this.getClass() + "{" +
+        return   this.getClass() + "\'" +
                 "name='" + name + '\'' +
-                ", Description='" + description + '\'' +
+                ", description='" + description + '\'' +
                 ", taskId=" + taskId +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
