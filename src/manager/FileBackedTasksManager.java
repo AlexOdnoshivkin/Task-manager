@@ -3,6 +3,7 @@ package manager;
 import exceptions.ManagerSaveException;
 import manager.formatting.Deserialization;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
@@ -21,24 +22,24 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     private final Path path;
 
-    public FileBackedTasksManager(String file) {
+    public FileBackedTasksManager(Path path) {
         super();
-        if (Files.notExists(Paths.get(file))) {
+        if (Files.notExists(path)) {
             try {
-                this.path = Files.createFile(Paths.get(file));
+                this.path = Files.createFile(path);
             } catch (IOException e) {
                 throw new ManagerSaveException("Ошибка записи файла менеджера");
             }
         } else {
-            this.path = Paths.get(file);
+            this.path = path;
         }
     }
 
-    public static FileBackedTasksManager loadFromFile(String file) {
-        FileBackedTasksManager fileBackedTasksManager = Managers.getFileBackedManager(file);
+    public static FileBackedTasksManager loadFromFile(File file) {
+        Path path  = file.toPath();
+        FileBackedTasksManager fileBackedTasksManager = Managers.getFileBackedManager(path);
         try {
-
-            String data = Files.readString(Paths.get(file));
+            String data = Files.readString(path);
             String[] splitData = data.split("\\n");
             int maxId = -1; // Переменная для максимального id для корректного создания новых задач
             for (int i = 1; i < splitData.length - 2; i++) { //создаём задачи из файла

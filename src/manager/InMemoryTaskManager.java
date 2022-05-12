@@ -166,6 +166,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteTaskById(int taskId) {
+        if (allTaskMap.get(taskId) == null) {
+            return;
+        }
         if (allTaskMap.get(taskId).getClass() == Task.class) {
             historyManager.remove(taskId);
             allTaskMap.remove(taskId);

@@ -4,11 +4,13 @@ import model.Status;
 import model.Subtask;
 import model.Task;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final FileBackedTasksManager manager = FileBackedTasksManager.loadFromFile("files/data.csv");
+    private static final File file = new File("files/data.csv");
+    private static final FileBackedTasksManager manager = FileBackedTasksManager.loadFromFile(file);
 
     /* Оставил пока методы тестирования в классе main, у меня тут уже были написаны необходимые методы, и не хочется
        загромождать класс FileBackedTasksManager, если это необходимо - перенесу */
@@ -19,7 +21,7 @@ public class Main {
         System.out.println("Cоздали задачи");
         testHistory();
         System.out.println("Создали исторю запросов\n");
-        FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile("files/data.csv");
+        FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile(file);
         System.out.println("Создали ещё один менеджер, загрузили в него данные из файла");
         Task newTask = new Task("Создать задачу", "в новом менеджере");
         newManager.createTask(newTask, Status.DONE);
