@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final File file = new File("files/data.csv");
+    private static final File file = new File("testFiles/data.csv");
     private static final FileBackedTasksManager manager = FileBackedTasksManager.loadFromFile(file);
 
     /* Оставил пока методы тестирования в классе main, у меня тут уже были написаны необходимые методы, и не хочется

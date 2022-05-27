@@ -5,16 +5,15 @@ import model.Status;
 import model.Subtask;
 import model.Task;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public interface TaskManager {
-    Collection<Task> getAllTasks();
+    List<Task> getAllTasks();
 
-    Collection<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
-    Collection<Subtask> getAllSubTasks();
+    List<Subtask> getAllSubTasks();
 
     void deleteAllTasks();
 
@@ -38,7 +37,9 @@ public interface TaskManager {
 
     void deleteTaskById(int taskId);
 
-    ArrayList<Subtask> getEpicSubtask(int epicId);
+    Set<Task> getPrioritizedTasks();
+
+    List<Subtask> getEpicSubtask(int epicId);
     List<Task> getHistory();
 
 }

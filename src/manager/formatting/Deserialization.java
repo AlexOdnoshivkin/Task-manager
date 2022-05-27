@@ -2,10 +2,14 @@ package manager.formatting;
 
 import model.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Deserialization {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
     public static Task taskFromString(String value) {
         String[] taskFields = value.split(","); //Разбиваем строку и создаём задачи на основе данных
@@ -17,7 +21,15 @@ public class Deserialization {
         Status status = Status.valueOf(taskFields[3]);
         switch (types) { // проверяем, какой класс задачи надо создать
             case TASK:
-                Task task = new Task(taskFields[2], taskFields[4]);
+                Task task;
+                if (taskFields[6].isBlank()) {
+                    task = new Task(taskFields[2], taskFields[4]);
+                }
+                else {
+                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], formatter);
+                    Duration duration = Duration.ofMinutes(Long.parseLong(taskFields[7]));
+                    task = new Task(taskFields[2], taskFields[4], startTime, duration);
+                }
                 task.setId(id);
                 task.setStatus(status);
                 return task;
@@ -27,7 +39,14 @@ public class Deserialization {
                 epic.setStatus(status);
                 return epic;
             case SUBTASK:
-                Subtask subtask = new Subtask(taskFields[2], taskFields[4]);
+                Subtask subtask;
+                if (taskFields[6].isBlank()) {
+                    subtask = new Subtask(taskFields[2], taskFields[4]);
+                } else {
+                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], formatter);
+                    Duration duration = Duration.ofMinutes(Long.parseLong(taskFields[7]));
+                    subtask = new Subtask(taskFields[2], taskFields[4], startTime, duration);
+                }
                 String headEpicId = taskFields[5].strip();
                 subtask.setHeadEpic(Integer.parseInt(headEpicId));
                 subtask.setId(id);

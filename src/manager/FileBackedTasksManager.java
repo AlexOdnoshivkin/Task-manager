@@ -44,6 +44,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             int maxId = -1; // Переменная для максимального id для корректного создания новых задач
             for (int i = 1; i < splitData.length - 2; i++) { //создаём задачи из файла
                 Task task = Deserialization.taskFromString(splitData[i]);
+                if (task.getClass() == Subtask.class) {
+                    Subtask subtask = (Subtask) task;
+                    Epic epic = (Epic) fileBackedTasksManager.allTaskMap.get(subtask.getHeadEpicId());
+                    epic.addSubTask(subtask);
+                }
                 if (task.getId() > maxId) {
                     maxId = task.getId();
                 }
@@ -65,9 +70,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     private void save() {
         StringBuilder stringBuilder = new StringBuilder();
-        String title = String.format("%-3s %-8s %-25s %-12s %-40s %-2s",
+        String title = String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-25s %-10s",
                 "id,", "type,", "name,", "status,",
-                "description,", "epic\n");
+                "description,", "epic,", "StartTime,", "Duration_min" +"\n");
         stringBuilder.append(title); //добавляем шапку
         // добавляем все задачи по очереди: Task,  Epic, Subtask
         Collection<Task> tasks = new ArrayList<>(getAllTasks());

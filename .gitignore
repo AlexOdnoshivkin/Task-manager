@@ -4,7 +4,7 @@
 # Log file
 *.log
 
-# BlueJ files
+# BlueJ testFiles
 *.ctxt
 
 # Mobile Tools for Java (J2ME)
@@ -29,7 +29,7 @@ hs_err_pid*
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 
-# Sensitive or high-churn files:
+# Sensitive or high-churn testFiles:
 .idea/dataSources.ids
 .idea/dataSources.xml
 .idea/dataSources.local.xml

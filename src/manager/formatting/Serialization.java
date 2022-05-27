@@ -5,20 +5,39 @@ import model.Subtask;
 import model.Task;
 import model.TaskTypes;
 
+import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Serialization {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
     public static String taskToString(Task task) {
         if (task.getType() == TaskTypes.SUBTASK) {
-            return String.format("%-3s %-8s %-25s %-12s %-40s %-2s", //форматируем строки задач для красоты
-                    task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
-                    task.getDescription() + ",", ((Subtask) task).getHeadEpicId());
+            if (task.getStartTime() != null) {
+                return String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-20s %-10s", //форматируем строки задач для красоты
+                        task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
+                        task.getDescription() + ",", ((Subtask) task).getHeadEpicId() + ",",
+                        formatter.format(task.getStartTime()) + ",", task.getDuration().toMinutes());
+            } else {
+                return String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-20s %-10s", //форматируем строки задач для красоты
+                        task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
+                        task.getDescription() + ",", ((Subtask) task).getHeadEpicId() + ",", ",", "");
+            }
+
 
         } else {
-            return String.format("%-3s %-8s %-25s %-12s %-40s ",
-                    task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
-                    task.getDescription() + ",");
+            if (task.getStartTime() != null) {
+                return String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-20s %-10s", //форматируем строки задач для красоты
+                        task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
+                        task.getDescription() + ",", ",",
+                        formatter.format(task.getStartTime()) + ",", task.getDuration().toMinutes());
+            } else {
+                return String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-20s %-10s", //форматируем строки задач для красоты
+                        task.getId() + ",", task.getType() + ",", task.getName() + ",", task.getStatus() + ",",
+                        task.getDescription() + ",", ",", ",", "");
+            }
+
         }
 
     }
