@@ -1,6 +1,9 @@
 package model;
 
 import manager.InMemoryTaskManager;
+import manager.Managers;
+import manager.TaskManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -10,7 +13,12 @@ import java.time.Month;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EpicTest {
-    InMemoryTaskManager manager = new InMemoryTaskManager();
+    private TaskManager manager;
+
+    @BeforeEach
+    void init() {
+        manager = Managers.getDefault();
+    }
 
     @Test
     public void shouldStatusNewWhenNotHaveSubtasks() {
