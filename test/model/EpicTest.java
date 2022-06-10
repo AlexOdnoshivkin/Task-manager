@@ -17,7 +17,7 @@ class EpicTest {
 
     @BeforeEach
     void init() {
-        manager = Managers.getDefault();
+        manager = new InMemoryTaskManager();
     }
 
     @Test

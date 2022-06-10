@@ -8,6 +8,7 @@ import model.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
     private Subtask subtask2;
 
     @BeforeEach
-    void addNewManager() {
+    void addNewManager() throws IOException {
         task1 = new Task("Task1", "description1",
                 LocalDateTime.of(2022, 5, 27, 1, 0), Duration.ofMinutes(120));
         manager.createTask(task1, Status.NEW);

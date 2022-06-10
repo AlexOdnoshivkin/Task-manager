@@ -19,6 +19,8 @@ public class Task {
        this.description = description;
        this.type = TaskTypes.TASK;
        this.taskId = count++;
+       startTime = null;
+       duration = null;
     }
 
     public Task(String name, String description, LocalDateTime startTime, Duration duration) {
@@ -91,7 +93,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (startTime == null) {
+        /*if (startTime == null) {
             return "Task{" +
                     "name='" + name + '\'' +
                     ", description='" + description + '\'' +
@@ -99,7 +101,7 @@ public class Task {
                     ", status=" + status +
                     ", type=" + type +
                     '}';
-        } else {
+        } else {*/
             return "Task{" +
                     "name='" + name + '\'' +
                     ", description='" + description + '\'' +
@@ -109,7 +111,7 @@ public class Task {
                     ", status=" + status +
                     ", type=" + type +
                     '}';
-        }
+        //}
 
     }
 

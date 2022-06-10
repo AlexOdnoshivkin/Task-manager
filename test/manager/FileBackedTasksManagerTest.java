@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -24,7 +25,7 @@ public class FileBackedTasksManagerTest extends TaskManagerTest {
 
     @Override
     @BeforeEach
-    void addNewManager() {
+    void addNewManager() throws IOException {
         file.delete();
         manager = FileBackedTasksManager.loadFromFile(file);
         super.addNewManager();

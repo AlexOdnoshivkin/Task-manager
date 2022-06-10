@@ -1,0 +1,9 @@
+id, type,    name,      status,      description,              epic, StartTime,           Duration_min
+1,  TASK,    Task1,     NEW,         Description task1,        ,     27.05.22 01:00,      120       
+8,  TASK,    Task8,     NEW,         Description task8,        ,     29.05.22 01:00,      120       
+2,  EPIC,    Epic2,     DONE,        Description epic2 work!,  ,     ,                              
+4,  EPIC,    NewEpic,   NEW,         Description newEpic,      ,     ,                              
+5,  EPIC,    NewEpic1,  NEW,         Description newEpic1,     ,     ,                              
+3,  SUBTASK, SubTask2,  DONE,        update,                   2,    ,                              
+
+1,2,3

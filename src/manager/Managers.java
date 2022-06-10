@@ -8,10 +8,10 @@ import java.nio.file.Path;
 public class Managers {
 
     public static TaskManager getDefault(){
-        return new InMemoryTaskManager();
+        return new HTTPTaskManager("http://localhost:8078");
     }
 
-    public static FileBackedTasksManager getFileBackedManager(Path path) {
+    public static FileBackedTasksManager getFileBackedManager(String path) {
         return new FileBackedTasksManager(path);
     }
 

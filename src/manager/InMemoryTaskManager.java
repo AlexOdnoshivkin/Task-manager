@@ -269,7 +269,7 @@ public class InMemoryTaskManager implements TaskManager {
             if (higherTask == null) {
                 return;
             }
-            if (higherTask.getStartTime() == null) {
+            if (higherTask.getStartTime() == null || task.getStartTime() == null) {
                 return;
             }
             if (task.getEndTime().isAfter(higherTask.getStartTime())) {

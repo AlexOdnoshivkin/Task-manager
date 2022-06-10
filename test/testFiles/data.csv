@@ -1,4 +1,4 @@
-id, type,    name,      status,      description,              epic, StartTime,                Duration_min
+id, type,    name,      status,      description,              epic, StartTime,           Duration_min
 1,  TASK,    Task1,     NEW,         Description task1,        ,     27.05.22 01:00,      120       
 2,  EPIC,    Epic2,     DONE,        Description epic2,        ,     21.05.22 11:00,      90        
 3,  SUBTASK, SubTask2,  DONE,        Description sub task3,    2,    21.05.22 11:00,      90        

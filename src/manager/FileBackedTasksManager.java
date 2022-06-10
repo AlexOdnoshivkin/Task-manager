@@ -22,8 +22,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     private final Path path;
 
-    public FileBackedTasksManager(Path path) {
+    public FileBackedTasksManager(String pathString) {
         super();
+        Path path = Path.of(pathString);
         if (Files.notExists(path)) {
             try {
                 this.path = Files.createFile(path);
@@ -36,8 +37,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
     public static FileBackedTasksManager loadFromFile(File file) {
+        String pathString = file.toString();
         Path path  = file.toPath();
-        FileBackedTasksManager fileBackedTasksManager = Managers.getFileBackedManager(path);
+        FileBackedTasksManager fileBackedTasksManager = Managers.getFileBackedManager(pathString);
         try {
             String data = Files.readString(path);
             String[] splitData = data.split("\\n");
@@ -53,6 +55,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     maxId = task.getId();
                 }
                 fileBackedTasksManager.allTaskMap.put(task.getId(), task);
+                if (task.getClass() != Epic.class) {
+                    fileBackedTasksManager.prioritizedTasks.add(task);
+                }
             }
             Task.setCount(maxId + 1);
             String savedHistory = splitData[splitData.length - 1]; // восстанавливаем историю из файла
@@ -68,9 +73,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return fileBackedTasksManager;
     }
 
-    private void save() {
+
+
+    protected void save() {
         StringBuilder stringBuilder = new StringBuilder();
-        String title = String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-25s %-10s",
+        String title = String.format("%-3s %-8s %-10s %-12s %-25s %-5s %-20s %-10s",
                 "id,", "type,", "name,", "status,",
                 "description,", "epic,", "StartTime,", "Duration_min" +"\n");
         stringBuilder.append(title); //добавляем шапку
