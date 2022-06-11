@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpServer;
 import http.handlers.EpicHandler;
 import http.handlers.SubtaskHandler;
 import http.handlers.TaskHandler;
-import manager.TaskManager;
+import manager.HTTPTaskManager;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,12 +14,12 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
 public class HttpTaskServer {
-    HttpServer httpServer;
+    private final HttpServer httpServer;
     private static final int PORT = 8080;
-    private final TaskManager manager;
+    private final HTTPTaskManager manager;
     private static final Gson gson = TasksGson.gson;
 
-    public HttpTaskServer(TaskManager manager) throws IOException {
+    public HttpTaskServer(HTTPTaskManager manager) throws IOException {
         this.manager = manager;
         httpServer = HttpServer.create();
         httpServer.bind(new InetSocketAddress(PORT), 0);
@@ -48,5 +48,9 @@ public class HttpTaskServer {
         try (OutputStream os = httpExchange.getResponseBody()) {
             os.write(response.getBytes(StandardCharsets.UTF_8));
         }
+    }
+
+    public void stopHttpServer() {
+        httpServer.stop(0);
     }
 }

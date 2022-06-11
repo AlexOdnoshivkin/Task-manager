@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SubtaskHandlerTest {
 
     private HttpTaskServer httpTaskServer;
-    private TaskManager manager;
+    private HTTPTaskManager manager;
     private final Gson gson = TasksGson.gson;
     private KVServer server;
     private Task task1;
@@ -69,7 +69,7 @@ public class SubtaskHandlerTest {
             manager.getTaskById(epic2.getId());
             manager.getTaskById(task1.getId());
             manager.getTaskById(subtask1.getId());
-            httpTaskServer = new HttpTaskServer(this.manager);
+            httpTaskServer = new HttpTaskServer(manager);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +78,7 @@ public class SubtaskHandlerTest {
 
     @AfterEach
     void serverStop() {
-        httpTaskServer.httpServer.stop(0);
+        httpTaskServer.stopHttpServer();
         server.stop();
     }
 

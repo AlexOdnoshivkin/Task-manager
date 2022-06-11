@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deserialization {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
     public static Task taskFromString(String value) {
         String[] taskFields = value.split(","); //Разбиваем строку и создаём задачи на основе данных
@@ -26,7 +26,7 @@ public class Deserialization {
                     task = new Task(taskFields[2], taskFields[4]);
                 }
                 else {
-                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], formatter);
+                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], FORMATTER);
                     Duration duration = Duration.ofMinutes(Long.parseLong(taskFields[7]));
                     task = new Task(taskFields[2], taskFields[4], startTime, duration);
                 }
@@ -43,7 +43,7 @@ public class Deserialization {
                 if (taskFields[6].isBlank()) {
                     subtask = new Subtask(taskFields[2], taskFields[4]);
                 } else {
-                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], formatter);
+                    LocalDateTime startTime = LocalDateTime.parse(taskFields[6], FORMATTER);
                     Duration duration = Duration.ofMinutes(Long.parseLong(taskFields[7]));
                     subtask = new Subtask(taskFields[2], taskFields[4], startTime, duration);
                 }

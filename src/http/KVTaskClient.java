@@ -7,8 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class KVTaskClient {
-    private HttpClient client;
-    String url;
+    private final HttpClient client;
+    private final String url;
     private String token;
 
     public KVTaskClient (String url) {
